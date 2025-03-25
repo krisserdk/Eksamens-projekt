@@ -1,5 +1,5 @@
 import pygame
-from Blackjack import cardHit
+from Blackjack import *
 import pygame_widgets
 from pygame_widgets.button import Button
 # Constants
@@ -44,30 +44,26 @@ def draw_text(text, x, y, font_size=36, color=(0, 0, 0)):
     screen = pygame.display.get_surface()
     screen.blit(text_surface, (x, y))
 
-def draw_buttons():
+def initialize_board(screen):
     """
-    Draws the buttons on the screen.
+    Initializes the board and creates buttons.
     """
-    pygame.draw.rect(screen, (0, 0, 0), (50, 500, 100, 50))
-    draw_text("Hit", 70, 510, color=WHITE)
-    pygame.draw.rect(screen, (0, 0, 0), (200, 500, 100, 50))
-    draw_text("Stand", 210, 510, color=WHITE)
+    global buttonHit  # Declare buttonHit as global to use it elsewhere
+    buttonHit = Button(
+        # Mandatory Parameters
+        screen,  # Surface to place button on
+        150,  # X-coordinate of top left corner
+        50,  # Y-coordinate of top left corner
+        200,  # Width
+        100,  # Height
 
-buttonHIt = Button(
-    # Mandatory Parameters
-    win,  # Surface to place button on
-    150,  # X-coordinate of top left corner
-    50,  # Y-coordinate of top left corner
-    200,  # Width
-    100,  # Height
+        # Optional Parameters
+        text='Hit',  # Text to display
+        fontSize=25,  # Size of font
+        margin=20,  # Minimum distance between text/image and edge of button
+        inactiveColour=(200, 50, 0),  # Colour of button when not being interacted with
+        hoverColour=(150, 0, 0),  # Colour of button when being hovered over
+        pressedColour=(0, 200, 20),  # Colour of button when being clicked
+        radius=20,  # Radius of border corners (leave empty for not curved)
+    )
 
-    # Optional Parameters
-    text='Play',  # Text to display
-    fontSize=25,  # Size of font
-    margin=20,  # Minimum distance between text/image and edge of button
-    inactiveColour=(200, 50, 0),  # Colour of button when not being interacted with
-    hoverColour=(150, 0, 0),  # Colour of button when being hovered over
-    pressedColour=(0, 200, 20),  # Colour of button when being clicked
-    radius = 20,  # Radius of border corners (leave empty for not curved)
-    onClick = CardHit  # Pass the function reference without calling it
-)
