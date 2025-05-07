@@ -16,6 +16,9 @@ def startgame():
     # Load card images
     card_images = load_card_images()
 
+    # Initialize buttons and pass the addCard function
+    initialize_buttons(screen, addCard)
+
     # Game assets and variables (example deck, hands, etc.)
     deck = create_deck()
     player_hand = [deck.pop(), deck.pop()]
@@ -77,13 +80,25 @@ def calculate_score(hand):
         aces -= 1
     return score
 
+def addCard():
+    """
+    Adds a card to the player's hand and checks if the player has busted.
+    """
+    global deck, player_hand, player_turn, winner
+
+    # Add a card to the player's hand
+    if player_turn:
+        player_hand.append(deck.pop())
+
+        # Check if the player has busted
+        if calculate_score(player_hand) > 21:
+            winner = "Dealer Wins!"
+            player_turn = False
+
 def display_hand(screen, hand, x, y, card_images, spacing=90):
     for i, card in enumerate(hand):
         card_image = card_images[card['name']]
         screen.blit(card_image, (x + i * spacing, y))
-
-def cardHit():
-    draw_text("Hit", 150, 50)
 
 def game_loop(screen, card_images):
     global deck, player_hand, dealer_hand
@@ -96,7 +111,8 @@ def game_loop(screen, card_images):
     winner = None
 
     while running:
-        for event in pygame.event.get():
+        events = pygame.event.get()  # Capture events
+        for event in events:
             if event.type == pygame.QUIT:
                 running = False
 
@@ -135,6 +151,9 @@ def game_loop(screen, card_images):
 
         if winner:
             draw_text(winner, 300, 500)
+
+        # Update buttons
+        pygame_widgets.update(events)
 
         pygame.display.flip()
 

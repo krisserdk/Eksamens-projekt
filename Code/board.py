@@ -1,11 +1,35 @@
 import pygame
-from Blackjack import *
 import pygame_widgets
 from pygame_widgets.button import Button
+
 # Constants
 WHITE = (255, 255, 255)
 GREEN = (0, 128, 0)
 SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
+
+def initialize_buttons(screen, on_hit):
+    """
+    Initializes buttons for the game.
+    """
+    global buttonHit  # Declare buttonHit as global to use it elsewhere
+    buttonHit = Button(
+        # Mandatory Parameters
+        screen,  # Surface to place button on
+        150,  # X-coordinate of top left corner
+        50,  # Y-coordinate of top left corner
+        200,  # Width
+        100,  # Height
+
+        # Optional Parameters
+        text='Hit',  # Text to display
+        fontSize=25,  # Size of font
+        margin=20,  # Minimum distance between text/image and edge of button
+        inactiveColour=(200, 50, 0),  # Colour of button when not being interacted with
+        hoverColour=(150, 0, 0),  # Colour of button when being hovered over
+        pressedColour=(0, 200, 20),  # Colour of button when being clicked
+        radius=20,  # Radius of border corners (leave empty for not curved)
+        onClick = on_hit  # Pass the function reference without importing it
+    )
 
 def draw_board(screen):
     """
@@ -43,27 +67,3 @@ def draw_text(text, x, y, font_size=36, color=(0, 0, 0)):
     text_surface = font.render(text, True, color)
     screen = pygame.display.get_surface()
     screen.blit(text_surface, (x, y))
-
-def initialize_board(screen):
-    """
-    Initializes the board and creates buttons.
-    """
-    global buttonHit  # Declare buttonHit as global to use it elsewhere
-    buttonHit = Button(
-        # Mandatory Parameters
-        screen,  # Surface to place button on
-        150,  # X-coordinate of top left corner
-        50,  # Y-coordinate of top left corner
-        200,  # Width
-        100,  # Height
-
-        # Optional Parameters
-        text='Hit',  # Text to display
-        fontSize=25,  # Size of font
-        margin=20,  # Minimum distance between text/image and edge of button
-        inactiveColour=(200, 50, 0),  # Colour of button when not being interacted with
-        hoverColour=(150, 0, 0),  # Colour of button when being hovered over
-        pressedColour=(0, 200, 20),  # Colour of button when being clicked
-        radius=20,  # Radius of border corners (leave empty for not curved)
-    )
-

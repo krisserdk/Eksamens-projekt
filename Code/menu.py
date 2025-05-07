@@ -3,14 +3,10 @@ import pygame
 import pygame_widgets
 from pygame_widgets.button import Button
 from Blackjack import startgame  # Update the import statement
-from board import initialize_board  # Import a function to initialize the board
 
 # Set up Pygame
 pygame.init()
 win = pygame.display.set_mode((500, 800))
-
-# Initialize the board (pass the screen object)
-initialize_board(win)
 
 # Creates the button with optional parameters
 button = Button(
