@@ -1,43 +1,65 @@
 import pygame
-
 import pygame_widgets
 from pygame_widgets.button import Button
-from Blackjack import startgame  # Update the import statement
+from blackjack import startgame  # Update the import statement
 
-# Set up Pygame
+def stopRun():
+    pygame.quit()
+    quit()
+
+def startGame():
+    """
+    Function to stop the game loop and exit the program.
+    """
+    play_button.hide()  # Hide the play button
+    quit_button.hide()  # Hide the quit button
+    startgame()  # Start the game
+    global run
+    run = False  # Stop the menu loop
+    pygame.quit()
+    quit()
+
+
+
 pygame.init()
 win = pygame.display.set_mode((500, 800))
-
-# Creates the button with optional parameters
-button = Button(
-    # Mandatory Parameters
-    win,  # Surface to place button on
-    150,  # X-coordinate of top left corner
-    50,  # Y-coordinate of top left corner
-    200,  # Width
-    100,  # Height
-
-    # Optional Parameters
-    text='Play',  # Text to display
-    fontSize=25,  # Size of font
-    margin=20,  # Minimum distance between text/image and edge of button
-    inactiveColour=(200, 50, 0),  # Colour of button when not being interacted with
-    hoverColour=(150, 0, 0),  # Colour of button when being hovered over
-    pressedColour=(0, 200, 20),  # Colour of button when being clicked
-    radius = 20,  # Radius of border corners (leave empty for not curved)
-    onClick = startgame  # Pass the function reference without calling it
-)
+pygame.display.set_caption("Blackjack Menu")
 run = True
 
+# Colors
+WHITE = (255, 255, 255)
+BLUE = (0, 102, 204)
+
+# Create buttons
+play_button = Button(
+    win, 150, 300, 200, 100,  # Position and size
+    text='Play', fontSize=25, margin=20,
+    inactiveColour=(0, 200, 0), hoverColour=(0, 150, 0), pressedColour=(0, 255, 0),
+    radius=20, onClick = startGame  # Pass the start function reference
+)
+
+quit_button = Button(
+    win, 150, 450, 200, 100,  # Position and size
+    text='Quit', fontSize=25, margin=20,
+    inactiveColour=(200, 0, 0), hoverColour=(150, 0, 0), pressedColour=(255, 0, 0),
+    radius=20, onClick=stopRun
+)
+
+# Menu loop
 while run:
     events = pygame.event.get()
     for event in events:
         if event.type == pygame.QUIT:
-            pygame.quit()
-            run = False
-            quit()
+            stopRun()
 
-    win.fill((255, 255, 255))
+    # Draw background
+    win.fill(BLUE)
 
-    pygame_widgets.update(events)  # Call once every loop to allow widgets to render and listen
+    # Draw title
+    font = pygame.font.Font(None, 74)
+    title_surface = font.render("Blackjack", True, WHITE)
+    win.blit(title_surface, (125, 100))  # Center the title
+
+    # Update buttons
+    pygame_widgets.update(events)
     pygame.display.update()
