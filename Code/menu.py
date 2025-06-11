@@ -32,17 +32,35 @@ BLUE = (0, 102, 204)
 
 # Create buttons
 play_button = Button(
-    win, 150, 300, 200, 100,  # Position and size
-    text='Play', fontSize=25, margin=20,
-    inactiveColour=(0, 200, 0), hoverColour=(0, 150, 0), pressedColour=(0, 255, 0),
-    radius=20, onClick = startGame  # Pass the start function reference
+    win, 
+    150, 
+    300, 
+    200, 
+    100,  # Position and size
+    text='Play', 
+    fontSize=25, 
+    margin=20,
+    inactiveColour=(0, 200, 0), 
+    hoverColour=(0, 150, 0), 
+    pressedColour=(0, 255, 0),
+    radius=20, 
+    onClick = startGame  # Pass the start function reference
 )
 
 quit_button = Button(
-    win, 150, 450, 200, 100,  # Position and size
-    text='Quit', fontSize=25, margin=20,
-    inactiveColour=(200, 0, 0), hoverColour=(150, 0, 0), pressedColour=(255, 0, 0),
-    radius=20, onClick=stopRun
+    win, 
+    150, 
+    450, 
+    200, 
+    100,  # Position and size
+    text='Quit', 
+    fontSize=25, 
+    margin=20,
+    inactiveColour=(200, 0, 0), 
+    hoverColour=(150, 0, 0), 
+    pressedColour=(255, 0, 0),
+    radius=20, 
+    onClick=stopRun
 )
 
 # Menu loop

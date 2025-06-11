@@ -23,14 +23,6 @@ def startgame():
     buttons = initialize_buttons(screen, addCard, stand)
     button = initialize_restart_button(screen, restartGame)  # Initialize the restart button
 
-    # Game assets and variables (example deck, hands, etc.)
-    deck = create_deck()
-    player_hand = [deck.pop(), deck.pop()]
-    dealer_hand = [deck.pop(), deck.pop()]
-
-    # Font for text
-    font = pygame.font.Font(None, 36)
-
     game_loop(screen, card_images)
 
 def load_card_images():
